@@ -189,7 +189,7 @@ et **data.table** pour le calcul intensif : un duo puissant pour manipuler des d
 
 ## Logs
 
-`
+```
 2025-10-15 14:51:59 HST - Démarrage du script de génération de données 1M... 
 2025-10-15 14:51:59 HST - Chargement des prénoms... 
 2025-10-15 14:51:59 HST - Distribution d'âge générée. 
@@ -278,7 +278,7 @@ et **data.table** pour le calcul intensif : un duo puissant pour manipuler des d
 2025-10-15 14:54:10 HST - Lancement de DT[, ...] 
 2025-10-15 14:54:14 HST - Fin de DT[, ...] 
 2025-10-15 14:54:14 HST - Durée totale : 22.5 secondes 
-`
+```
 
 ## 📜 Licence
 
