@@ -1,0 +1,134 @@
+---
+title: "Explorer une population de 100 millions de personnes… pour zéro budget"
+author: "Laurent PELLET - ISPF"
+format: pptx
+editor: visual
+---
+
+La statistique n’est pas réservée aux supercalculateurs ni aux logiciels coûteux.
+
+Avec **R** et quelques packages libres, il est possible de manipuler et d’analyser **des centaines de millions d’individus** sur un simple ordinateur.
+
+## 🎯 Objectif du projet
+
+- Générer une **population fictive réaliste** composée de millions d’individus, dotés de caractéristiques cohérentes.
+- L'analyser rapidement en utilisant deux méthodes
+  - [`data.table`](https://rdatatable.gitlab.io/data.table/) — génération vectorisée ultra-rapide  
+  - [`arrow`](https://cran.r-project.org/package=arrow) — lecture/écriture en format **Parquet**  
+
+
+## 📊 Structure du jeu de données
+
+| Colonne          | Description                                    |
+| ---------------- | ---------------------------------------------- |
+| `prenom`         | Prénom simulé selon le sexe                    |
+| `age`            | Âge recalculé à partir de la date de naissance |
+| `date_naissance` | Date de naissance cohérente avec l’âge         |
+| `sexe`           | Sexe biologique simulé (“Homme” / “Femme”)     |
+| `taille`         | Taille en cm, distribuée selon le sexe         |
+| `niveau_etudes`  | Niveau d’études selon l’âge                    |
+
+
+## Aperçu des données
+
+| prenom  | age | date_naissance | sexe  | taille | niveau_etudes |
+|----------|-----|----------------|--------|---------|----------------|
+| Sacha    | 23  | 2002-05-27     | Homme  | 186.3   | Bac            |
+| Simon    | 28  | 1997-05-24     | Homme  | 183.1   | CAP/BEP        |
+| Louna    | 30  | 1995-07-05     | Femme  | 164.4   | Master         |
+| Charles  | 27  | 1998-10-09     | Homme  | 166.0   | CAP/BEP        |
+| Simon    | 52  | 1973-06-17     | Homme  | 177.8   | Licence        |
+| Robin    | 77  | 1948-05-29     | Homme  | 178.6   | Collège        |
+
+## 💾 Formats produits
+
+
+| N    | CSV     | Parquet |
+|------|---------|---------|
+| 1M   | 40 Mo   | 5 Mo    |
+| 10M  | 407 Mo  | 56 Mo   |
+| 100M | 4072 Mo | 564 Mo  |
+
+Compatibles avec :
+**R**, **Python (pandas)**, **Spark**, **Arrow**, etc.
+
+
+## 🔍 CSV vs Parquet
+
+| Critère                | CSV              | Parquet                                 |
+| ---------------------- | ---------------- | --------------------------------------- |
+| Taille du fichier      | Large            | 5–10× plus petit                        |
+| Lecture                | Lente            | Très rapide                             |
+| Écriture               | Rapide           | Moyenne (compression)                   |
+| Conservation des types | Non              | Oui                                     |
+| Compatibilité          | Universelle      | Outils modernes                         |
+| Idéal pour             | Échanges simples | Stockage massif                         |
+
+
+## Analyse data.table (CSV)
+
+```r
+Results_DT <- DT[ , .(
+  N          = .N,
+  moy_age    = mean(age),
+  p95_age    = quantile(age, 0.95),
+  moy_taille = mean(taille),
+  sd_taille  = sd(taille)
+), by = age][order(age)]
+```
+
+* Lecture complète du CSV en mémoire
+* Calcul ultra-rapide une fois chargé
+* Excellente performance RAM
+* Limite : mémoire disponible
+
+
+## Analyse Arrow (Parquet)
+
+```r
+query <- DTPQ %>%
+  group_by(age) %>%
+  summarise(
+    N          = n(),
+    moy_age    = mean(age),
+    p95_age    = quantile(age, 0.95),
+    moy_taille = mean(taille),
+    sd_taille  = sd(taille)
+  )
+Results_Parquet <- query |> collect()
+```
+
+* Lecture **lazy** (à la demande)
+* Colonnes lues : `age`, `taille`
+* Calcul **déporté** dans Arrow
+* Idéal pour données massives
+
+## ⚖️ Comparaison
+
+| Aspect                     | `arrow` (Parquet)     | `data.table` (CSV) |
+| -------------------------- | --------------------- | ------------------ |
+| Lecture                    | Lazy                  | RAM complète       |
+| Format                     | Colonnaire, compressé | Texte brut         |
+| Colonnes lues              | Sélectives            | Toutes             |
+| Calcul                     | Moteur Arrow          | Local              |
+| Performance grands volumes | Excellente            | Limitée            |
+| Idéal pour                 | Big Data              | Données locales    |
+
+
+## 🚀 Performances
+
+| Taille    | Génération | Analyse (Arrow) | Analyse (data.table) |
+| --------- | ---------- | --------------- | -------------------- |
+| **1 M**   | 1.0 s      | 0.1 s           | 0.2 s                |
+| **10 M**  | 8.4 s      | 0.4 s           | 2.0 s                |
+| **100 M** | 87.2 s     | 4.3 s           | 17.8 s               |
+
+Croissance quasi linéaire
+
+
+## 🧭 En résumé
+
+- **Arrow + Parquet** : pour lire et agréger rapidement d’énormes volumes sans les charger intégralement.
+- **data.table + CSV** : pour des analyses rapides en RAM.
+
+
