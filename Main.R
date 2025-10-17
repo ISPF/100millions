@@ -5,10 +5,10 @@
 #| **100 M**              | 93.8 s             | 4.3 s                   | 22.5 s              |
   
 
-N <- 1e7  
+N <- 1e8
 source("src/functions.R")
 source("src/createData.R")
-source("src/analyse.R")
-
-head(Results_DT)
+source("src/analyseParquet.R")
 head(Results_Parquet)
+source("src/analyseDT.R")
+head(Results_DT)
