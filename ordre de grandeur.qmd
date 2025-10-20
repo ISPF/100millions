@@ -1,0 +1,53 @@
+---
+title: "100 millions de lignes : ordre de grandeur"
+format: revealjs
+editor: visual
+---
+
+
+## 💳 **Transactions & argent**
+
+| Domaine                             | Volume typique                        | Équivalence avec 100 millions de lignes              |
+| ----------------------------------- | ------------------------------------- | ---------------------------------------------------- |
+| 💳 Transactions carte Visa (monde)  | ~600 millions/jour                    | ≈ **1/6 de la journée Visa mondiale**                |
+               |
+
+
+
+## 🌐 **Réseaux sociaux et web**
+
+| Domaine              | Volume typique      | Équivalence                                                   |
+| -------------------- | ------------------- | ------------------------------------------------------------- |
+| 📸 Photos Instagram  | ~95 millions/jour   | ≈ **toutes les photos postées chaque jour sur Instagram**     |
+| 📷 Photos Facebook   | ~350 millions/jour  | ≈ **un tiers des photos postées sur Facebook en une journée** |
+| 🐦 Tweets publiés    | ~500 millions/jour  | ≈ **20 % des tweets quotidiens mondiaux**                     |
+| 💬 Messages WhatsApp | ~100 milliards/jour | ≈ **0,1 % des messages WhatsApp quotidiens**                  |
+
+
+
+## 📦 **Industrie & logistique**
+
+| Domaine                                         | Volume typique              | Équivalence                                                   |
+| ----------------------------------------------- | --------------------------- | ------------------------------------------------------------- |
+| 📦 Colis traités par Amazon                     | ~66 millions/jour           | ≈ **1,5 jour d’activité Amazon monde**                        |
+| 🚚 Colis livrés par La Poste/Colissimo (France) | ~2 millions/jour            | ≈ **50 jours d’activité**                                     |
+
+
+## 📞 **Télécom & numérique**
+
+| Domaine                           | Volume typique      | Équivalence                                           |
+| --------------------------------- | ------------------- | ----------------------------------------------------- |
+| 📱 SMS envoyés en France          | ~150 millions/jour  | ≈ **les SMS envoyés en France en une journée**        |
+| 📡 Appels téléphoniques en France | ~100 millions/jour  | ≈ **un jour complet de communications téléphoniques** |
+| 🔌 Requêtes Internet Google       | ~8,5 milliards/jour | 100 millions ≈ **15 minutes de recherches Google**    |
+
+
+
+## 🚗 **Mobilité & transport**
+
+| Domaine                                | Volume typique     | Équivalence                            |
+| -------------------------------------- | ------------------ | -------------------------------------- |
+| 🚗 Trajets Uber monde                  | ~25 millions/jour  | ≈ **4 jours d’activité Uber**          |
+| 🚆 Voyages SNCF (annuel ~1,7 milliard) | ~4,6 millions/jour | ≈ **3 semaines de trajets SNCF**       |
+| ✈️ Passagers aériens monde             | ~12 millions/jour  | ≈ **8 jours de trafic aérien mondial** |
+
